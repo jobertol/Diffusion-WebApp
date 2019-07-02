@@ -44,10 +44,10 @@ function setup()
   reset.mousePressed(r);
   reset.style('')
 
-  reset.style('background-color','#ffffff');
+  reset.style('background-color','#00BCE2');
   reset.style('border','0px');
   reset.style('border-radius','15px');
-  reset.style('color','#000000');
+  reset.style('color','#ffffff');
   reset.style('padding','5px 10px');
   reset.style('text-decoration','none');
   reset.style('display','inline-block');
