@@ -17,6 +17,7 @@ function setup()
   i1 = createSlider(0, 400, 100, 1);
   i1.position(25, 500);
   i1.size(100, 20);
+  i1.style('border-radius', '5px');
 
   i2 = createSlider(0, 400, 300, 1);
   i2.position(135, 500);
@@ -41,6 +42,16 @@ function setup()
   reset = createButton('Reset');
   reset.position(600, 240);
   reset.mousePressed(r);
+  reset.style('')
+
+  reset.style('background-color','#ffffff');
+  reset.style('border','0px');
+  reset.style('border-radius','15px');
+  reset.style('color','#000000');
+  reset.style('padding','5px 10px');
+  reset.style('text-decoration','none');
+  reset.style('display','inline-block');
+  reset.style('font-size','13px');
 
   speedCoef = 0;
 }
