@@ -35,14 +35,17 @@ function setup()
   play.position(500, 500);
 
   select = createSelect();
-	select.option('Semi-Infinite from Constant Source');
-	select.option('Interi4usion in Two Semi-Infinite Bodies');
+	select.option('Case 1');
+  select.option('Case 2');
+  select.option('Case 3');
+  select.option('Case 4');
+  select.option('Case 5');
+  select.option('Case 6');
 	select.position(600, 200);
 
   reset = createButton('Reset');
   reset.position(600, 240);
   reset.mousePressed(r);
-  reset.style('')
 
   reset.style('background-color','#00BCE2');
   reset.style('border','0px');
@@ -58,23 +61,84 @@ function setup()
 
 function draw()
 {
-
   let x = [];
-  let y = [];
+  let y1 = [];
+  let y2 = [];
 
   background('#444444');
   stroke(1);
   fill('#ffffff');
-  text('Initial\nConcentration', i1.x , i1.y - 23);
-  fill('#ffffff');
-  text('Surface\nConcentration', i2.x , i2.y - 23);
-  fill('#ffffff');
-  text('Diffusivity', i3.x , i3.y - 10);
-  fill('#ffffff');
-  text('Speed', speed.x , speed.y - 10);
-  fill('#ffffff');
-  text('Play', play.x , play.y - 10);
+  text('Select Diffusion Type', select.x , select.y - 23);
 
+  if(select.value()=='Case 1')
+  {
+    i2.elt.max = 400;
+    i2.elt.min = 0;
+    i2.elt.step = 1;
+    fill('#ffffff');
+    text('Initial\nConcentration', i1.x , i1.y - 23);
+    fill('#ffffff');
+    text('Surface\nConcentration', i2.x , i2.y - 23);
+    fill('#ffffff');
+    text('Diffusivity', i3.x , i3.y - 10);
+    fill('#ffffff');
+    text('Speed', speed.x , speed.y - 10);
+    fill('#ffffff');
+    text('Play', play.x , play.y - 10);
+  }
+  else if(select.value()=='Case 2')
+  {
+    i2.elt.max = 400;
+    i2.elt.min = 0;
+    i2.elt.step = 1;
+    fill('#ffffff');
+    text('Initial\nConcentration', i1.x , i1.y - 23);
+    fill('#ffffff');
+    text('Surface\nConcentration', i2.x , i2.y - 23);
+    fill('#ffffff');
+    text('Diffusivity', i3.x , i3.y - 10);
+    fill('#ffffff');
+    text('Speed', speed.x , speed.y - 10);
+    fill('#ffffff');
+    text('Play', play.x , play.y - 10);
+  }
+  else if(select.value()=='Case 3')
+  {
+    i2.elt.max = 1;
+    i2.elt.min = 0.1;
+    i2.elt.step = 0.001;
+    fill('#ffffff');
+    text('Initial\nConcentration', i1.x , i1.y - 23);
+    fill('#ffffff');
+    text('Surface\nConcentration', i2.x , i2.y - 23);
+    fill('#ffffff');
+    text('Diffusivity', i3.x , i3.y - 10);
+    fill('#ffffff');
+    text('Speed', speed.x , speed.y - 10);
+    fill('#ffffff');
+    text('Play', play.x , play.y - 10);
+  }
+  else if(select.value()=='Case 4')
+  {
+    fill('#ffffff');
+    text('Initial\nConcentration', i1.x , i1.y - 23);
+    fill('#ffffff');
+    text('Surface\nConcentration', i2.x , i2.y - 23);
+    fill('#ffffff');
+    text('Diffusivity', i3.x , i3.y - 10);
+    fill('#ffffff');
+    text('Speed', speed.x , speed.y - 10);
+    fill('#ffffff');
+    text('Play', play.x , play.y - 10);
+  }
+  else if(select.value()=='Case 5')
+  {
+
+  }
+  else if(select.value()=='Case 6')
+  {
+
+  }
 
   translate(i1.x,i1.y - 50);
   stroke('#ffffff');
@@ -84,27 +148,72 @@ function draw()
 
   if(play.checked())
   {
-    let xTemp = 0;
 
-    for(let i = 0; i <= 550; i++)
+
+    if(select.value()=='Case 1')
     {
-      let out = diffuse1(xTemp, -i1.value(), -i2.value(), i3.value(), time);
-      xTemp += 1/150;
-      x.push(i);
-      y.push(out);
+      let xTemp = 0;
+      for(let i = 0; i <= 550; i++)
+      {
+        let out = diffuse1(xTemp, -i1.value(), -i2.value(), i3.value(), time);
+        xTemp += 1/150;
+        x.push(i);
+        y1.push(out);
+      }
+    }
+    else if(select.value()=='Case 2')
+    {
+      let xTemp = -550/300;
+      for(let i = 0; i <= 550; i++)
+      {
+        let out = diffuse2(xTemp, -i1.value(), -i2.value(), i3.value(), time);
+        xTemp += 1/150;
+        x.push(i);
+        y1.push(out[0]);
+        y2.push(out[1]);
+      }
+    }
+    else if(select.value()=='Case 3')
+    {
+      let xTemp = -550/300;
+      for(let i = 0; i <= 550; i++)
+      {
+        let out = diffuse3(xTemp, i2.value(), -i1.value(), i3.value(), time);
+        xTemp += 1/150;
+        x.push(i);
+        y1.push(out);
+      }
+    }
+    else if(select.value()=='Case 4')
+    {
+    }
+    else if(select.value()=='Case 5')
+    {
+    }
+    else if(select.value()=='Case 6')
+    {
     }
 
-    let ymax = max(y);
-    let ymin = min(y);
-
     noFill();
-    stroke('#ffffff');
+    stroke('#3FA9F5');
   	beginShape();
   	for(let i = 0; i < x.length; i++)
     {
-      vertex(i, y[i]);
+      vertex(i, y1[i]);
   	}
   	endShape();
+
+    if(select.value()=='Case 2')
+    {
+      noFill();
+      stroke('#FF931E');
+    	beginShape();
+    	for(let i = 0; i < x.length; i++)
+      {
+        vertex(i, y2[i]);
+    	}
+    	endShape();
+    }
 
     time += speed.value()*speed.value();
   }
@@ -114,6 +223,24 @@ function diffuse1(x, co, cs, D, t)
 {
     let temp = (co+(cs-co)*(1-erf(x/(2*sqrt(D*t)))));
     return temp;
+}
+
+function diffuse2(x,ca,cb,D,t)
+{
+  let temp = [];
+  temp.push(0.5*ca*(1-erf(x/(2*sqrt(D*t)))));
+  temp.push(cb-0.5*cb*(1-erf(x/(2*sqrt(D*t)))));
+  return temp;
+}
+
+function diffuse3(x,L,c,D,t)
+{
+  return(0.5*c*(erf((x+L)/(2*sqrt(D*t)))-erf((x-L)/(2*sqrt(D*t)))));
+}
+
+function diffuse4(x,N,D,t)
+{
+  return(N/sqrt(4*3.1415926535*D*t)*exp(-1*(x*x/4/D/t)));
 }
 
 function erf(num)
