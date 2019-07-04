@@ -12,27 +12,22 @@ let p  =  0.3275911;
 
 function setup()
 {
-  createCanvas(900, 575);
+  createCanvas(600, 575);
 
   i1 = createSlider(0, 400, 100, 1);
-  i1.position(25, 500);
-  i1.size(100, 20);
-  i1.style('border-radius', '5px');
+  i1.position(25, 525);
 
   i2 = createSlider(0, 400, 300, 1);
-  i2.position(135, 500);
-  i2.size(100, 20);
+  i2.position(i1.x+i1.width+15, i1.y);
 
   i3 = createSlider(pow(10,-6), 10*pow(10,-6), pow(10,-6), 0.01*pow(10,-6));
-  i3.position(245, 500);
-  i3.size(100, 20);
+  i3.position(i2.x+i2.width+15, i1.y);
 
   speed = createSlider(1, 100, 1, 1);
-  speed.position(355, 500);
-  speed.size(100, 20);
+  speed.position(i3.x+i3.width+15, i1.y);
 
   play = createCheckbox('',false);
-  play.position(500, 500);
+  play.position(speed.x+speed.width+15, i1.y-17);
 
   select = createSelect();
 	select.option('Case 1');
@@ -41,22 +36,12 @@ function setup()
   select.option('Case 4');
   select.option('Case 5');
   select.option('Case 6');
-	select.position(600, 200);
+	select.position(430, 520);
+  select.class('select.ccs');
 
-  reset = createButton('Reset');
-  reset.position(600, 240);
+  reset = createButton('t = 0');
+  reset.position(525, select.y-12);
   reset.mousePressed(r);
-
-  reset.style('background-color','#00BCE2');
-  reset.style('border','0px');
-  reset.style('border-radius','15px');
-  reset.style('color','#ffffff');
-  reset.style('padding','5px 10px');
-  reset.style('text-decoration','none');
-  reset.style('display','inline-block');
-  reset.style('font-size','13px');
-
-  speedCoef = 0;
 }
 
 function draw()
@@ -68,88 +53,197 @@ function draw()
   background('#444444');
   stroke(1);
   fill('#ffffff');
-  text('Select Diffusion Type', select.x , select.y - 23);
+  text('Diffusion Type', select.x-3, speed.y - 17);
 
   if(select.value()=='Case 1')
   {
+    i1.elt.max = 400;
+    i1.elt.min = 0;
+    i1.elt.step = 1;
+
     i2.elt.max = 400;
     i2.elt.min = 0;
     i2.elt.step = 1;
+
+    speed.elt.max = 100;
+    speed.elt.min = 1;
+    speed.elt.step = 1;
+
     fill('#ffffff');
-    text('Initial\nConcentration', i1.x , i1.y - 23);
+    text('Initial\nConcentration', i1.x , i1.y - 30);
     fill('#ffffff');
-    text('Surface\nConcentration', i2.x , i2.y - 23);
+    text('Surface\nConcentration', i2.x , i2.y - 30);
     fill('#ffffff');
-    text('Diffusivity', i3.x , i3.y - 10);
+    text('Diffusivity', i3.x , i3.y - 17);
     fill('#ffffff');
-    text('Speed', speed.x , speed.y - 10);
+    text('Speed', speed.x , speed.y - 17);
     fill('#ffffff');
-    text('Play', play.x , play.y - 10);
+    text('Play', play.x , speed.y - 17);
+
+    translate(i1.x,i1.y - 75);
+    stroke('#ffffff');
+    line(0,0,0,-400);
+    stroke('#ffffff');
+    line(0,0,550,0);
   }
   else if(select.value()=='Case 2')
   {
+    i1.elt.max = 400;
+    i1.elt.min = 0;
+    i1.elt.step = 1;
+
     i2.elt.max = 400;
     i2.elt.min = 0;
     i2.elt.step = 1;
+
+    speed.elt.max = 100;
+    speed.elt.min = 1;
+    speed.elt.step = 1;
+
     fill('#ffffff');
-    text('Initial\nConcentration', i1.x , i1.y - 23);
+    text('Initial\nConcentration', i1.x , i1.y - 30);
     fill('#ffffff');
-    text('Surface\nConcentration', i2.x , i2.y - 23);
+    text('Surface\nConcentration', i2.x , i2.y - 30);
     fill('#ffffff');
-    text('Diffusivity', i3.x , i3.y - 10);
+    text('Diffusivity', i3.x , i3.y - 17);
     fill('#ffffff');
-    text('Speed', speed.x , speed.y - 10);
+    text('Speed', speed.x , speed.y - 17);
     fill('#ffffff');
-    text('Play', play.x , play.y - 10);
+    text('Play', play.x , speed.y - 17);
+
+    translate(i1.x,i1.y - 75);
+    stroke('#ffffff');
+    line(275,0,275,-400);
+    stroke('#ffffff');
+    line(0,0,550,0);
   }
   else if(select.value()=='Case 3')
   {
+    i1.elt.max = 400;
+    i1.elt.min = 0;
+    i1.elt.step = 1;
+
     i2.elt.max = 1;
     i2.elt.min = 0.1;
     i2.elt.step = 0.001;
+
+    speed.elt.max = 100;
+    speed.elt.min = 1;
+    speed.elt.step = 1;
+
     fill('#ffffff');
-    text('Initial\nConcentration', i1.x , i1.y - 23);
+    text('Initial\nConcentration', i1.x , i1.y - 30);
     fill('#ffffff');
-    text('Surface\nConcentration', i2.x , i2.y - 23);
+    text('Rectangular\nProfile', i2.x , i2.y - 30);
     fill('#ffffff');
-    text('Diffusivity', i3.x , i3.y - 10);
+    text('Diffusivity', i3.x , i3.y - 17);
     fill('#ffffff');
-    text('Speed', speed.x , speed.y - 10);
+    text('Speed', speed.x , speed.y - 17);
     fill('#ffffff');
-    text('Play', play.x , play.y - 10);
+    text('Play', play.x , speed.y - 17);
+
+    translate(i1.x,i1.y - 75);
+    stroke('#ffffff');
+    line(275,0,275,-400);
+    stroke('#ffffff');
+    line(0,0,550,0);
   }
   else if(select.value()=='Case 4')
   {
+    i1.elt.max = 800;
+    i1.elt.min = 0;
+    i1.elt.step = 1;
+
+    i2.elt.max = 400;
+    i2.elt.min = 32;
+    i2.elt.step = 1;
+
+    speed.elt.max = 0.02;
+    speed.elt.min = 0.001;
+    speed.elt.step = 0.001;
+
+    print(i2.value());
+
     fill('#ffffff');
-    text('Initial\nConcentration', i1.x , i1.y - 23);
+    text('Initial Amount', i1.x , i1.y - 30);
     fill('#ffffff');
-    text('Surface\nConcentration', i2.x , i2.y - 23);
+    text('Diffusivity', i2.x , i2.y - 30);
     fill('#ffffff');
-    text('Diffusivity', i3.x , i3.y - 10);
+    text('Speed', speed.x , speed.y - 17);
     fill('#ffffff');
-    text('Speed', speed.x , speed.y - 10);
-    fill('#ffffff');
-    text('Play', play.x , play.y - 10);
+    text('Play', play.x , speed.y - 17);
+
+    translate(i1.x,i1.y - 75);
+    stroke('#ffffff');
+    line(275,0,275,-400);
+    stroke('#ffffff');
+    line(0,0,550,0);
   }
   else if(select.value()=='Case 5')
   {
+    i1.elt.max = 400;
+    i1.elt.min = i2.value();
+    i1.elt.step = 1;
 
+    i2.elt.max = 400;
+    i2.elt.min = 0;
+    i2.elt.step = 1;
+
+    speed.elt.max = 100;
+    speed.elt.min = 1;
+    speed.elt.step = 1;
+
+    fill('#ffffff');
+    text('Initial\nConcentration', i1.x , i1.y - 30);
+    fill('#ffffff');
+    text('Surface\nConcentration', i2.x , i2.y - 30);
+    fill('#ffffff');
+    text('Diffusivity', i3.x , i3.y - 17);
+    fill('#ffffff');
+    text('Speed', speed.x , speed.y - 17);
+    fill('#ffffff');
+    text('Play', play.x , speed.y - 17);
+
+    translate(i1.x,i1.y - 75);
+    stroke('#ffffff');
+    line(0,0,0,-400);
+    stroke('#ffffff');
+    line(0,0,550,0);
   }
   else if(select.value()=='Case 6')
   {
+    i1.elt.max = 400;
+    i1.elt.min = 0;
+    i1.elt.step = 1;
 
+    i2.elt.max = 400;
+    i2.elt.min = i1.value();
+    i2.elt.step = 1;
+
+    speed.elt.max = 200;
+    speed.elt.min = 1;
+    speed.elt.step = 1;
+
+    fill('#ffffff');
+    text('Initial\nConcentration', i1.x , i1.y - 30);
+    fill('#ffffff');
+    text('Surface\nConcentration', i2.x , i2.y - 30);
+    fill('#ffffff');
+    text('Diffusivity', i3.x , i3.y - 17);
+    fill('#ffffff');
+    text('Speed', speed.x , speed.y - 17);
+    fill('#ffffff');
+    text('Play', play.x , speed.y - 17);
+
+    translate(i1.x,i1.y - 75);
+    stroke('#ffffff');
+    line(0,0,0,-400);
+    stroke('#ffffff');
+    line(0,0,550,0);
   }
-
-  translate(i1.x,i1.y - 50);
-  stroke('#ffffff');
-  line(0,0,0,-400);
-  stroke('#ffffff');
-  line(0,0,550,0);
 
   if(play.checked())
   {
-
-
     if(select.value()=='Case 1')
     {
       let xTemp = 0;
@@ -186,12 +280,36 @@ function draw()
     }
     else if(select.value()=='Case 4')
     {
+      let xTemp = -550/20;
+      for(let i = 0; i <= 550; i++)
+      {
+        let out = diffuse4(xTemp, -i1.value(), i2.value(), time);
+        xTemp += 1/10;
+        x.push(i);
+        y1.push(out);
+      }
     }
     else if(select.value()=='Case 5')
     {
+      let xTemp = 0;
+      for(let i = 0; i <= 550; i++)
+      {
+        let out = diffuse5(xTemp, -i1.value(), -i2.value(), i3.value(), time, 1000);
+        xTemp += 1/50;
+        x.push(i);
+        y1.push(out);
+      }
     }
     else if(select.value()=='Case 6')
     {
+      let xTemp = -550;
+      for(let i = 0; i <= 550; i++)
+      {
+        let out = diffuse6(xTemp, -i1.value(), -i2.value(), i3.value(), time, 1000);
+        xTemp += 1/25;
+        x.push(i);
+        y1.push(out);
+      }
     }
 
     noFill();
@@ -214,15 +332,15 @@ function draw()
     	}
     	endShape();
     }
-
+    
     time += speed.value()*speed.value();
   }
 }
 
 function diffuse1(x, co, cs, D, t)
 {
-    let temp = (co+(cs-co)*(1-erf(x/(2*sqrt(D*t)))));
-    return temp;
+  let temp = (co+(cs-co)*(1-erf(x/(2*sqrt(D*t)))));
+  return temp;
 }
 
 function diffuse2(x,ca,cb,D,t)
@@ -240,7 +358,36 @@ function diffuse3(x,L,c,D,t)
 
 function diffuse4(x,N,D,t)
 {
-  return(N/sqrt(4*3.1415926535*D*t)*exp(-1*(x*x/4/D/t)));
+  return(N/sqrt(4*PI*D*t)*exp(-1*(x*x/4/D/t)));
+}
+
+function diffuse5(x, co ,cs, D, t, n)
+{
+  let L = 11;
+  let infSum = 0;
+  for(let i = 0; i<n; i++)
+  {
+    let inc = 2*i + 1;
+    infSum += (1/(inc))*sin((inc)*PI*x/L)*exp(-1*pow((inc*PI/L),2)*D*t);
+  }
+  return (cs + (co-cs)*(4/PI)*infSum);
+}
+
+function diffuse6(x, co ,cs, D, t, n)
+{
+  let L = 11;
+  let infSum = 0;
+  for(let i = 0; i<n; i++)
+  {
+    let L = 11;
+    let infSum = 0;
+    for(let i = 0; i<n; i++)
+    {
+      let inc = 2*i + 1;
+      infSum += (1/(inc))*sin((inc)*PI*x/L/2+PI)*exp(-1*pow((inc*PI/L),2)*D*t);
+    }
+    return (cs+(co-cs)*(4/PI)*infSum);
+  }
 }
 
 function erf(num)
@@ -251,7 +398,6 @@ function erf(num)
     sign = -1;
     num *= sign;
   }
-
   let t = 1.0/(1.0+p*num);
   let output = 1.0 - (((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t*exp(-num*num);
   return sign*output;
